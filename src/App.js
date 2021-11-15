@@ -4,6 +4,8 @@ import { AddThoughtForm } from './AddThoughtForm';
 import { Thought } from './Thought';
 import { generateId, getNewExpirationTime } from './utilities';
 
+//set up an array of thoughts (each with 3 properties); initialize thoughts using the useState hook:
+//setThoughts setter function will update the list of thoughts when called
 export function App() {
   const [thoughts, setThoughts] = useState([
     {
@@ -18,9 +20,14 @@ export function App() {
     },
   ]);
 
+//addThought function uses setThoughts to add a thoughts to the front of the array:
+//using a stateSetter callback function since the value of new state depends on value of prev state.
+//take the value of the prev array using spread syntax. On line 40, pass this to AddThoughtForm as a prop.
 const addThought = (thought) => {
   setThoughts(prev => [thought, ...prev])
 }
+
+//using setThought and filter function to only keep thoughts if id doesn't match the thoughtIdToRemove:
 const removeThought = (thoughtIdToRemove) => {
   setThoughts((thoughts) =>
     thoughts.filter((thought) => thought.id !== thoughtIdToRemove)
